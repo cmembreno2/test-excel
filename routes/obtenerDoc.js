@@ -41,7 +41,7 @@ router.get('/doc', async (req,res)=> {
         .string('CHELIVETT HOUSE')
         .style(style);
 
-        pathExcel =path.join(__dirname,'documentos',`${nombre}.xlsx`)
+        pathExcel =path.join(__dirname,'documentos',`Factura.xlsx`)
 
         wb.write(pathExcel)
 
@@ -51,7 +51,7 @@ router.get('/doc', async (req,res)=> {
 
         res.download(pathExcel)
 
-        console.log(`Document downloaded wit name: ${nombre} ...`)
+        console.log(`Document downloaded wit name: Factura ...`)
     }catch(err){
         console.log(`Error creating file: ${err}`)
         return res.status(err.code).send(err.message);
