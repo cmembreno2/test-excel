@@ -233,18 +233,9 @@ router.get('/createDoc', async (req,res)=> {
 
         //const pathExcel =path.join(__dirname,'excel','Factura.xlsx')
 
-        wb.write('Factura.xlsx', function(err, stats){
+        var file = await wb.write('Factura.xlsx')
 
-            if (err) {
-                console.error(err);
-            }else{
-                function downloadFile(){
-                    res.download('Factura.xlsx')
-                }
-                downloadFile();
-                return res.status(200).json({sucess:200});
-            }
-        })
+        res.download(file)
 
 
     }catch(err){
