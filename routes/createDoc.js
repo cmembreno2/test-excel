@@ -303,7 +303,10 @@ router.post('/createDoc', async (req,res)=> {
 
         console.log(`Document created wit name: ${nombre} ...`)
 
+        res.download(pathExcel)
+
         return res.status(200).send({success:true});
+        
 
         //res.download(pathExcel)
     }catch(err){
