@@ -205,6 +205,17 @@ router.post('/createDoc', async (req,res)=> {
             },
         });
 
+        var style12 = wb.createStyle({
+            font: {
+                color: '#000000',
+                size: 38,
+                italics: true
+            },
+            alignment: {
+                horizontal: 'center',
+            },
+        });
+
         ws.column(2).setWidth(40)
         ws.column(3).setWidth(80)
         ws.column(4).setWidth(40)
@@ -273,6 +284,9 @@ router.post('/createDoc', async (req,res)=> {
             ws.cell(i+14, 2)
             .string(prod.cant.toString())
             .style(style11);
+            ws.cell(i+14, 3)
+            .string(prod.producto.nombre)
+            .style(style12);
             ws.cell(i+14, 4)
             .string(`CS ${prod.total.toString()}`)
             .style(style11);
