@@ -9,7 +9,7 @@ router.post('/createDoc', async (req,res)=> {
     
     console.log("Executing Create Document...")
     
-    const {nombre,fecha,cliente,entrega,personal,mesa,productos,sub_total,pv,empaque,total}=req.body;
+    const {nombre,fecha,cliente,entrega,personal,mesa,cantProductos,sub_total,pv,empaque,total,productos}=req.body;
     
     try{
         var wb = new xl.Workbook();
@@ -179,7 +179,7 @@ router.post('/createDoc', async (req,res)=> {
                 bold: true
             },
             alignment: {
-                horizontal: 'center',
+                horizontal: 'left',
             },
         });
 
@@ -188,6 +188,17 @@ router.post('/createDoc', async (req,res)=> {
                 color: '#000000',
                 size: 50,
                 bold: true
+            },
+            alignment: {
+                horizontal: 'left',
+            },
+        });
+
+        var style11 = wb.createStyle({
+            font: {
+                color: '#000000',
+                size: 48,
+                italics: true
             },
             alignment: {
                 horizontal: 'center',
@@ -245,7 +256,7 @@ router.post('/createDoc', async (req,res)=> {
         .string('Productos:')
         .style(style3);
         ws.cell(11, 3)
-        .string(` ${productos}`)
+        .string(` ${cantProductos}`)
         .style(style8);
 
         ws.cell(13, 2)
@@ -258,56 +269,63 @@ router.post('/createDoc', async (req,res)=> {
         .string('Total')
         .style(style7);
 
-        ws.cell(27, 2)
+        productos.forEach((prod,i)=>{
+            ws.cell(i+14, 2)
+            .string(prod.cant.toString())
+            .style(style11);
+            ws.cell(i+14, 4)
+            .string(`CS ${prod.total.toString()}`)
+            .style(style11);
+        })
+
+        ws.cell(30, 2)
         .style(style4);
-        ws.cell(27, 3)
+        ws.cell(30, 3)
         .string('Sub-Total:')
         .style(style4);
-        ws.cell(27, 4)
-        .string(`CS ${sub_total}`)
+        ws.cell(30, 4)
+        .string(` CS ${sub_total}`)
         .style(style9);
-        ws.cell(28, 3)
+        ws.cell(31, 3)
         .string('P.V. 10%:')
         .style(style3);
-        ws.cell(28, 4)
-        .string(`CS ${pv}`)
+        ws.cell(31, 4)
+        .string(` CS ${pv}`)
         .style(style10);
-        ws.cell(29, 3)
+        ws.cell(32, 3)
         .string('Empaque:')
         .style(style3);
-        ws.cell(29, 4)
-        .string(`CS ${empaque}`)
+        ws.cell(32, 4)
+        .string(` CS ${empaque}`)
         .style(style10);
-        ws.cell(30, 3)
+        ws.cell(33, 3)
         .string('Total:')
         .style(style3);
-        ws.cell(30, 4)
-        .string(`CS ${total}`)
+        ws.cell(33, 4)
+        .string(` CS ${total}`)
         .style(style10);
 
-        ws.cell(34, 2, 34,4,true)
+        ws.cell(37, 2, 37,4,true)
         .string('GRACIAS POR VISITARNOS')
         .style(style);
-        ws.cell(35, 2, 35,4,true)
+        ws.cell(38, 2, 38,4,true)
         .string('Te esperamos pronto de regreso!')
         .style(style1);
-        ws.cell(36, 2, 36,4,true)
+        ws.cell(39, 2, 39,4,true)
         .string('www.facebook.com/ChelivettsHouse')
         .style(style1);
 
         console.log("Document created...")
 
-        //const pathExcel =path.join(__dirname,'excel','Factura.xlsx')
         const pathExcel =path.join(`${nombre}.xlsx`)
 
         wb.write(pathExcel)       
         return res.status(200).send({success:true}); 
-
-        //res.download('Factura.xlsx')
 
     }catch(err){
         console.log(`Error creating file: ${err}`)
         return res.status(err.code).send(err.message);
     }
 });
+
 module.exports = router;
