@@ -179,7 +179,7 @@ router.post('/createDoc', async (req,res)=> {
                 bold: true
             },
             alignment: {
-                horizontal: 'left',
+                horizontal: 'center',
             },
         });
 
@@ -215,37 +215,37 @@ router.post('/createDoc', async (req,res)=> {
         .string('Fecha:')
         .style(style3);
         ws.cell(6, 3)
-        .string(fecha)
+        .string(` ${fecha}`)
         .style(style8);
         ws.cell(7, 2)
         .string('Cliente:')
         .style(style3);
         ws.cell(7, 3)
-        .string(cliente)
+        .string(` ${cliente}`)
         .style(style8);
         ws.cell(8, 2)
-        .string('Entrega:')
+        .string(' Entrega:')
         .style(style3);
         ws.cell(8, 3)
-        .string(entrega)
+        .string(` ${entrega}`)
         .style(style8);
         ws.cell(9, 2)
         .string('Personal:')
         .style(style3);
         ws.cell(9, 3)
-        .string(personal)
+        .string(` ${personal}`)
         .style(style8);
         ws.cell(10, 2)
         .string('Mesa:')
         .style(style3);
         ws.cell(10, 3)
-        .string(mesa)
+        .string(` ${mesa}`)
         .style(style8);
         ws.cell(11, 2)
         .string('Productos:')
         .style(style3);
         ws.cell(11, 3)
-        .string(productos)
+        .string(` ${productos}`)
         .style(style8);
 
         ws.cell(13, 2)
@@ -264,25 +264,25 @@ router.post('/createDoc', async (req,res)=> {
         .string('Sub-Total:')
         .style(style4);
         ws.cell(27, 4)
-        .string(sub_total)
+        .string(`CS ${sub_total}`)
         .style(style9);
         ws.cell(28, 3)
         .string('P.V. 10%:')
         .style(style3);
         ws.cell(28, 4)
-        .string(pv)
+        .string(`CS ${pv}`)
         .style(style10);
         ws.cell(29, 3)
         .string('Empaque:')
         .style(style3);
         ws.cell(29, 4)
-        .string(empaque)
+        .string(`CS ${empaque}`)
         .style(style10);
         ws.cell(30, 3)
         .string('Total:')
         .style(style3);
         ws.cell(30, 4)
-        .string(total)
+        .string(`CS ${total}`)
         .style(style10);
 
         ws.cell(34, 2, 34,4,true)
