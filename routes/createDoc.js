@@ -3,11 +3,16 @@ var xl = require('excel4node');
 require('dotenv').config();
 var path= require('path');
 const { HorizontalAlignment } = require('excel4node');
+const fs = require('fs')
+
 const router = express.Router();
-router.get('/createDoc', async (req,res)=> {
+
+router.post('/createDoc', async (req,res)=> {
     console.log("Executing Create Document...")
     
-      
+    const {nombre} = req.body
+    console.log(nombre)
+    
     try{
         var wb = new xl.Workbook();
         var options = {
@@ -213,9 +218,13 @@ router.get('/createDoc', async (req,res)=> {
         console.log("Document created...")
 
         //const pathExcel =path.join(__dirname,'excel','Factura.xlsx')
+        const pathExcel =path.join(`${nombre}.xlsx`)
 
-        wb.write('Factura.xlsx')
-        res.download('Factura.xlsx')
+        wb.write(pathExcel)       
+        return res.status(200).send({success:true}); 
+
+        //res.download('Factura.xlsx')
+
     }catch(err){
         console.log(`Error creating file: ${err}`)
         return res.status(err.code).send(err.message);

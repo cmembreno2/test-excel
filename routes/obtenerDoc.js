@@ -5,49 +5,17 @@ var path= require('path');
 
 const router = express.Router();
 
-router.get('/doc', async (req,res)=> {
+router.get('/doc/:id', async (req,res)=> {
 
+    const id = req.params.id
     console.log("Executing Obtener Doc...")
     
     try{
 
-        var wb = new xl.Workbook();
-
-        var options = {
-            sheetFormat: {
-                defaultRowHeight: 90
-            }
-        }
-
-        var ws = wb.addWorksheet('Sheet 1',options);
-        ws.setPrintArea(1, 2, 36, 4);
-
-        var style = wb.createStyle({
-            font: {
-                color: '#000000',
-                size: 72,
-                bold: true
-            },
-            alignment: {
-                horizontal: 'center',
-            },
-        });
-
-        ws.column(2).setWidth(40)
-        ws.column(3).setWidth(80)
-        ws.column(4).setWidth(40)
-
-        ws.cell(1, 2, 1,4,true)
-        .string('CHELIVETT HOUSE')
-        .style(style);
-
-        pathExcel =path.join(__dirname,'documentos',`Factura.xlsx`)
-
-        wb.write(pathExcel)
 
         //const nombre = req.params.id;
 
-        //pathExcel =path.join(__dirname,'documentos',`${nombre}.xlsx`)
+        const pathExcel =path.join(`${id}.xlsx`)
 
         res.download(pathExcel)
 
