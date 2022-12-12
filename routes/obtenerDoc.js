@@ -12,14 +12,12 @@ router.get('/doc/:id', async (req,res)=> {
     
     try{
 
-
-        //const nombre = req.params.id;
-
         const pathExcel =path.join(`${id}.xlsx`)
 
         res.download(pathExcel)
 
-        console.log(`Document downloaded wit name: Factura ...`)
+        console.log(`Document downloaded wit name: ${id}`)
+
     }catch(err){
         console.log(`Error creating file: ${err}`)
         return res.status(err.code).send(err.message);
