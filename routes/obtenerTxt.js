@@ -4,16 +4,16 @@ var path= require('path');
 
 const router = express.Router();
 
-router.get('/doc/:id', async (req,res)=> {
+router.get('/txt/:id', async (req,res)=> {
 
     const id = req.params.id
-    console.log("Executing Obtener Doc...")
+    console.log("Executing Obtener Txt...")
     
     try{
 
-        const pathExcel =path.join(`${id}.xlsx`)
+        const pathTxt =path.join(`${id}.txt`)
 
-        res.download(pathExcel)
+        res.download(pathTxt)
 
         console.log(`Document downloaded wit name: ${id}`)
 

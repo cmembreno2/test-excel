@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/createDoc', async (req,res)=> {
     
-    console.log("Executing Create Document...")
+    console.log("Executing Create Excel...")
     
     const {nombre,fecha,cliente,entrega,personal,mesa,cantProductos,sub_total,pv,empaque,total,productos}=req.body;
     
