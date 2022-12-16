@@ -1,4 +1,4 @@
-# test-app-firestore with sendgrid integration
+# test-app to create invoices .xlsx and .txt
 
 1. npm install
-2. npm start dev
+2. npm run start
