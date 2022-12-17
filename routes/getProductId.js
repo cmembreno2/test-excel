@@ -34,7 +34,7 @@ router.get('/products/:id', async (req,res)=>{
         const snapshot = await db.collection(process.env.PRODUCT_COLLECTION).doc(id).get();
          results.push(snapshot.data());
         console.log("Get Product by Id executed successfully...")
-        return res.status(200).json({product: results});
+        return res.status(200).json({results});
     }catch(err){
         console.log(`Error executing Get Product by Id: ${err}`);
         return res.status(err.code).send(err.message);

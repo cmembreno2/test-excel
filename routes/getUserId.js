@@ -34,7 +34,7 @@ router.get('/users/:id', async (req,res)=>{
         const snapshot = await db.collection(process.env.USER_COLLECTION).doc(id).get();
          results.push(snapshot.data());
         console.log("Get User by Id executed successfully...")
-        return res.status(200).json({user: results});
+        return res.status(200).json({results});
     }catch(err){
         console.log(`Error executing Get User by Id: ${err}`);
         return res.status(err.code).send(err.message);

@@ -35,7 +35,7 @@ router.get('/users', async (req,res)=> {
         results.push(doc.data());
         });
         console.log("Get Users executed successfully...")
-        return res.status(200).json({users: results});
+        return res.status(200).json({results});
     }catch(err){
         console.log(`Error executing Get Users: ${err}`)
         return res.status(err.code).send(err.message);
