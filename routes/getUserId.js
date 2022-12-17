@@ -28,11 +28,10 @@ router.get('/users/:id', async (req,res)=>{
     });
 
     const db = admin.firestore();
-    const results = [];
 
     try{
         const snapshot = await db.collection(process.env.USER_COLLECTION).doc(id).get();
-         results.push(snapshot.data());
+         const results=snapshot.data();
         console.log("Get User by Id executed successfully...")
         return res.status(200).json(results);
     }catch(err){
