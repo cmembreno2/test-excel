@@ -31,7 +31,10 @@ router.get('/products', async (req,res)=> {
     try{
         const snapshot = await db.collection(process.env.PRODUCT_COLLECTION).get();
         snapshot.forEach(doc=>{
-        results.push(doc.data());
+        const idDoc = doc.id
+        const datos = doc.data()
+        datos['_id']=idDoc
+        results.push(datos);
         });
         console.log("Get Products executed successfully...")
         return res.status(200).json(results);
