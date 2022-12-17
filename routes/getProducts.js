@@ -34,7 +34,7 @@ router.get('/products', async (req,res)=> {
         results.push(doc.data());
         });
         console.log("Get Products executed successfully...")
-        return res.status(200).json({results});
+        return res.status(200).json(results);
     }catch(err){
         console.log(`Error executing Get Products: ${err}`)
         return res.status(err.code).send(err.message);
