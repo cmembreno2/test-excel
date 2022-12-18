@@ -9,6 +9,8 @@ const getUsers = require('./routes/getUsers');
 const getProducts = require('./routes/getProducts');
 const getProductId = require('./routes/getProductId');
 const getUserId = require('./routes/getUserId');
+const getProviders = require('./routes/getProviders');
+const getProviderId = require('./routes/getProviderId');
 const morgan = require('morgan');
 
 const app = express();
@@ -25,5 +27,7 @@ app.use(getUsers);
 app.use(getProducts);
 app.use(getProductId);
 app.use(getUserId);
+app.use(getProviders);
+app.use(getProviderId);
 
 module.exports = app;
